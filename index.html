@@ -1,79 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WE ARE HIRING</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WE ARE HIRING</title>
 
-<style>
-body{
-    margin:0;
-    font-family:Arial;
-    background:#ffffff;
-    text-align:center;
-}
-.container{
-    max-width:600px;
-    margin:auto;
-}
-.container img{
-    width:100%;
-    display:block;
-}
-.whatsapp-btn{
-    position:fixed;
-    bottom:20px;
-    left:50%;
-    transform:translateX(-50%);
-    background:#25D366;
-    color:#fff;
-    padding:15px 25px;
-    border-radius:50px;
-    font-size:18px;
-    font-weight:bold;
-    text-decoration:none;
-    box-shadow:0 4px 12px rgba(0,0,0,0.2);
-}
-</style>
+    <!-- Facebook Pixel -->
+    <script>
+      !function(f,b,e,v,n,t,s){
+        if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+          n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)
+      }(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
 
-<!-- Facebook Pixel -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}
-(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '1318913896794644'); // ← 你的 Pixel ID
+      fbq('track', 'PageView');         // 页面访问追踪
+    </script>
+    <noscript>
+      <img height="1" width="1" style="display:none"
+           src="https://www.facebook.com/tr?id=1318913896794644&ev=PageView&noscript=1"/>
+    </noscript>
+    <!-- End Pixel -->
 
-fbq('init','YOUR_PIXEL_ID');  // <-- 改成你的 Pixel
-fbq('track','PageView');
-</script>
-
+    <link rel="stylesheet" href="style.css">
+    <style>
+      body { font-family: Arial, sans-serif; margin:0; padding:0; text-align:center; }
+      .container { padding: 20px; max-width: 600px; margin: auto; }
+      .btn-whatsapp { background:#25D366; color:white; padding:15px 25px; border:none; border-radius:5px; font-size:18px; cursor:pointer; }
+      .btn-whatsapp:hover { opacity:0.9; }
+      img { max-width:100%; margin-bottom:20px; }
+    </style>
 </head>
-
 <body>
 
 <div class="container">
-    <img src="images/1.jpg">
-    <img src="images/2.jpg">
-    <!-- 如果有更多图片，直接复制一行 <img src="images/3.jpg"> -->
+    <!-- 页面内容 / 图片 -->
+    <img src="your-image1.jpg" alt="Banner 1">
+    <img src="your-image2.jpg" alt="Banner 2">
+
+    <!-- WhatsApp 按钮 -->
+    <button id="whatsappBtn" class="btn-whatsapp">Contact us - WhatsApp</button>
 </div>
 
-<a class="whatsapp-btn" id="applyBtn" href="#">Contact us on WhatsApp</a>
-
 <script>
-var whatsappLinks = [
-    "https://wa.me/YOURNUMBER"  // <-- 改成你的 WhatsApp
-];
+  document.getElementById('whatsappBtn').addEventListener('click', function() {
+      // 触发 Facebook Lead 事件
+      fbq('track', 'Lead');
 
-document.getElementById("applyBtn").onclick=function(){
-    fbq('track','Lead');  // Facebook Lead 事件
-    var link = whatsappLinks[Math.floor(Math.random()*whatsappLinks.length)];
-    window.location.href = link;
-};
+      // 跳转 WhatsApp 链接
+      const waLink = "https://liuhongliang11895.github.io/888/mapping.json"; // ← 替换成你的 WhatsApp 链接
+      window.location.href = waLink;
+  });
 </script>
 
 </body>
