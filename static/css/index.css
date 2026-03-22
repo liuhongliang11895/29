@@ -1,0 +1,264 @@
+﻿    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box
+}
+
+body {
+    max-width: 900px;
+    margin: 0 auto;
+    font-family: 'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+    line-height: 1.6;
+    color: #333
+}
+
+h1 {
+    font-size: 1.8rem;
+    color: #182848;
+    padding: 0 15px;
+    
+}
+
+h2 {
+    font-size: 1.4rem;
+    color: #182848;
+    padding: 0 15px;
+}
+
+h3 {
+    font-size: 1.2rem;
+    color: #182848;
+    padding: 0 15px;
+    
+}
+
+h4 {
+    font-size: 1rem;
+    color: #182848;
+    padding: 0 15px;
+}
+
+h5 {
+    font-size: 0.8rem;
+    color: #182848;
+    padding: 0 15px;
+    
+}
+
+h6 {
+    font-size: 0.6rem;
+    color: #182848;
+    padding: 0 15px;
+}
+
+p {
+    font-size: 1.1rem
+}
+
+.ql-align-center {
+    text-align: center;
+}
+
+.ql-align-right {
+    text-align: right;
+}
+
+.ql-align-justify {
+    text-align: justify;
+}
+
+#loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 0.5s
+}
+
+.dot-pulse {
+    position: relative;
+    left: -9999px;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #4b6cb7;
+    color: #4b6cb7;
+    box-shadow: 9999px 0 0 -5px;
+    animation: dot-pulse 1.5s infinite linear;
+    animation-delay: 0.25s
+}
+
+.dot-pulse::before,.dot-pulse::after {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #4b6cb7;
+    color: #4b6cb7
+}
+
+.dot-pulse::before {
+    box-shadow: 9984px 0 0 -5px;
+    animation: dot-pulse-before 1.5s infinite linear;
+    animation-delay: 0s
+}
+
+.dot-pulse::after {
+    box-shadow: 10014px 0 0 -5px;
+    animation: dot-pulse-after 1.5s infinite linear;
+    animation-delay: 0.5s
+}
+
+@keyframes dot-pulse-before {
+    0% {
+        box-shadow: 9984px 0 0 -5px
+    }
+
+    30% {
+        box-shadow: 9984px 0 0 2px
+    }
+
+    60%,100% {
+        box-shadow: 9984px 0 0 -5px
+    }
+}
+
+@keyframes dot-pulse {
+    0% {
+        box-shadow: 9999px 0 0 -5px
+    }
+
+    30% {
+        box-shadow: 9999px 0 0 2px
+    }
+
+    60%,100% {
+        box-shadow: 9999px 0 0 -5px
+    }
+}
+
+@keyframes dot-pulse-after {
+    0% {
+        box-shadow: 10014px 0 0 -5px
+    }
+
+    30% {
+        box-shadow: 10014px 0 0 2px
+    }
+
+    60%,100% {
+        box-shadow: 10014px 0 0 -5px
+    }
+}
+
+.container {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease,transform 0.5s ease
+}
+
+.image-container {
+    
+}
+
+.image-container img {
+    max-width: 100%;
+    height: auto;
+}
+
+.floating-btn {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 25px;
+    background: linear-gradient(135deg,#4b6cb7,#182848);
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    box-shadow: 0 6px 20px rgba(75,108,183,0.5);
+    animation: pulse 1.5s infinite;
+    transition: all 0.3s ease;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    min-width: 200px;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.floating-btn:hover {
+    transform: translateX(-50%) scale(1.05);
+    box-shadow: 0 8px 25px rgba(75,108,183,0.7)
+}
+
+.floating-btn-default {
+    background: linear-gradient(135deg,#4b6cb7,#182848);
+    color: #fff;
+}
+
+.floating-btn-telegram {
+    background: linear-gradient(135deg, #0088cc, #00a8e8);
+    color: #fff;
+}
+
+.floating-btn-whatsapp {
+    background: linear-gradient(135deg, #25d366, #128c7e);
+    color: #fff;
+}
+
+.floating-btn-line {
+    background: linear-gradient(135deg, #00b900, #00c300);
+    color: #fff;
+}
+
+.floating-btn-download {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #fff;
+}
+
+.btn-icon {
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-icon svg {
+    width: 100%;
+    height: 100%;
+    display: block; 
+    vertical-align: middle; 
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(75,108,183,0.6)
+    }
+
+    70% {
+        box-shadow: 0 0 0 15px rgba(75,108,183,0)
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(75,108,183,0)
+    }
+}
+

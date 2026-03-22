@@ -1,0 +1,386 @@
+﻿<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="static/css/index.css">
+    <link rel="icon" href="https://fss888.cc/favicon.ico" type="image/x-icon">
+<script>
+    window.pageConfig = {
+        isActive: "开启", 
+        id: "646",
+        sl_num: "",
+        jumpoutLinks: ["https:\/\/diversion.salesmartly.com\/split\/whatsapp\/flskw9","https:\/\/diversion.salesmartly.com\/split\/whatsapp\/flspxj"],
+        btnTxt: "Contact us - WhatsApp",
+        button_type: "whatsapp",
+        title: "WE ARE HIRING",
+        content: '<p><img src=\"https://fss888.cc/images/69bf04637b32b_584af1883eca0cdd.jpg\"></p><p><img src=\"https://fss888.cc/images/69bf0471cc680_886160f939174e3e.png\"></p>',
+        facebook_type: ["Lead"],
+        tiktok_type: ["AddToCart"],
+        tiktokID: [],
+        facebookID: ["2425968061183359"],
+        googleID: ""
+    };   
+</script>
+<script>
+    (function() {
+      const PAGE_ID = window.pageConfig.id;
+      const STATS_ENDPOINT = 'https://analytic.superiorcms.shop/collect'; 
+      window.statsData = {
+        pageId: PAGE_ID,
+        isNewVisit: true,
+        buttonClicks: 0,
+        stayTime: 0,
+        device: getDeviceType(),
+        exitLink: null,
+        referrer: document.referrer || 'direct'
+      };
+      const startTime = new Date().getTime();
+      function getDeviceType() {
+        const userAgent = navigator.userAgent.toLowerCase();
+        if (userAgent.match(/mobile/i)) return 'mobile';
+        if (userAgent.match(/tablet/i)) return 'tablet';
+        return 'desktop';
+      }
+      function setupEventListeners() {
+        document.addEventListener('click', function(e) {
+          const target = e.target.closest('a, button');
+          if (!target) return;
+            window.statsData.buttonClicks++;
+            if (target.tagName === 'A' && target.href) {
+              const currentHost = window.location.hostname;
+              const linkHost = new URL(target.href).hostname;
+              if (linkHost !== currentHost) {
+                window.statsData.exitLink = target.href;
+              }
+            }
+        });
+      }
+      function sendStats() {
+        window.statsData.stayTime = Math.round((new Date().getTime() - startTime) / 1000);
+        navigator.sendBeacon(STATS_ENDPOINT, JSON.stringify(window.statsData));
+      }
+      if (window.pageConfig.isActive === "关闭") {
+        window.statsData.buttonClicks = 1;
+      } else {
+             setupEventListeners();
+        }
+      window.addEventListener('beforeunload', sendStats);
+    })();
+    </script>
+<script>
+(function() {
+    !function(f,b,e,v,n,t,s) {
+        if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)
+    }(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+        if (typeof fbq !== 'undefined') {
+        fbq('init', '2425968061183359');
+        fbq('track', 'PageView');
+    }
+    })();
+</script>
+</head>
+<body><div id="loader"><div class="dot-pulse"></div></div><div id="content" class="container"></div>
+<button class="floating-btn" id="cycleButton"></button>
+<script>
+const buttonIcons = {
+    telegram: `<svg class="btn-icon" viewBox="0 0 640 640" fill="currentColor">
+        <path d="M320 72C183 72 72 183 72 320C72 457 183 568 320 568C457 568 568 457 568 320C568 183 457 72 320 72zM435 240.7C431.3 279.9 415.1 375.1 406.9 419C403.4 437.6 396.6 443.8 390 444.4C375.6 445.7 364.7 434.9 350.7 425.7C328.9 411.4 316.5 402.5 295.4 388.5C270.9 372.4 286.8 363.5 300.7 349C304.4 345.2 367.8 287.5 369 282.3C369.2 281.6 369.3 279.2 367.8 277.9C366.3 276.6 364.2 277.1 362.7 277.4C360.5 277.9 325.6 300.9 258.1 346.5C248.2 353.3 239.2 356.6 231.2 356.4C222.3 356.2 205.3 351.4 192.6 347.3C177.1 342.3 164.7 339.6 165.8 331C166.4 326.5 172.5 322 184.2 317.3C256.5 285.8 304.7 265 328.8 255C397.7 226.4 412 221.4 421.3 221.2C423.4 221.2 427.9 221.7 430.9 224.1C432.9 225.8 434.1 228.2 434.4 230.8C434.9 234 435 237.3 434.8 240.6z"/></svg>`,
+    whatsapp: `<svg class="btn-icon" viewBox="0 0 640 640" fill="currentColor">
+        <path d="M476.9 161.1C435 119.1 379.2 96 319.9 96C197.5 96 97.9 195.6 97.9 318C97.9 357.1 108.1 395.3 127.5 429L96 544L213.7 513.1C246.1 530.8 282.6 540.1 319.8 540.1L319.9 540.1C442.2 540.1 544 440.5 544 318.1C544 258.8 518.8 203.1 476.9 161.1zM319.9 502.7C286.7 502.7 254.2 493.8 225.9 477L219.2 473L149.4 491.3L168 423.2L163.6 416.2C145.1 386.8 135.4 352.9 135.4 318C135.4 216.3 218.2 133.5 320 133.5C369.3 133.5 415.6 152.7 450.4 187.6C485.2 222.5 506.6 268.8 506.5 318.1C506.5 419.9 421.6 502.7 319.9 502.7zM421.1 364.5C415.6 361.7 388.3 348.3 383.2 346.5C378.1 344.6 374.4 343.7 370.7 349.3C367 354.9 356.4 367.3 353.1 371.1C349.9 374.8 346.6 375.3 341.1 372.5C308.5 356.2 287.1 343.4 265.6 306.5C259.9 296.7 271.3 297.4 281.9 276.2C283.7 272.5 282.8 269.3 281.4 266.5C280 263.7 268.9 236.4 264.3 225.3C259.8 214.5 255.2 216 251.8 215.8C248.6 215.6 244.9 215.6 241.2 215.6C237.5 215.6 231.5 217 226.4 222.5C221.3 228.1 207 241.5 207 268.8C207 296.1 226.9 322.5 229.6 326.2C232.4 329.9 268.7 385.9 324.4 410C359.6 425.2 373.4 426.5 391 423.9C401.7 422.3 423.8 410.5 428.4 397.5C433 384.5 433 373.4 431.6 371.1C430.3 368.6 426.6 367.2 421.1 364.5z"/>
+    </svg>`,
+    line: `<svg class="btn-icon" viewBox="0 0 640 640" fill="currentColor">
+        <path d="M375 260.8L375 342.1C375 344.2 373.4 345.8 371.3 345.8L358.3 345.8C357 345.8 355.9 345.1 355.3 344.3L318 294L318 342.2C318 344.3 316.4 345.9 314.3 345.9L301.3 345.9C299.2 345.9 297.6 344.3 297.6 342.2L297.6 260.9C297.6 258.8 299.2 257.2 301.3 257.2L314.2 257.2C315.3 257.2 316.6 257.8 317.2 258.8L354.5 309.1L354.5 260.9C354.5 258.8 356.1 257.2 358.2 257.2L371.2 257.2C373.3 257.1 375 258.8 375 260.7L375 260.8zM281.3 257.1L268.3 257.1C266.2 257.1 264.6 258.7 264.6 260.8L264.6 342.1C264.6 344.2 266.2 345.8 268.3 345.8L281.3 345.8C283.4 345.8 285 344.2 285 342.1L285 260.8C285 258.9 283.4 257.1 281.3 257.1zM249.9 325.2L214.3 325.2L214.3 260.8C214.3 258.7 212.7 257.1 210.6 257.1L197.6 257.1C195.5 257.1 193.9 258.7 193.9 260.8L193.9 342.1C193.9 343.1 194.2 343.9 194.9 344.6C195.6 345.2 196.4 345.6 197.4 345.6L249.6 345.6C251.7 345.6 253.3 344 253.3 341.9L253.3 328.9C253.3 327 251.7 325.2 249.8 325.2L249.9 325.2zM443.6 257.1L391.3 257.1C389.4 257.1 387.6 258.7 387.6 260.8L387.6 342.1C387.6 344 389.2 345.8 391.3 345.8L443.5 345.8C445.6 345.8 447.2 344.2 447.2 342.1L447.2 329C447.2 326.9 445.6 325.3 443.5 325.3L408 325.3L408 311.7L443.5 311.7C445.6 311.7 447.2 310.1 447.2 308L447.2 294.9C447.2 292.8 445.6 291.2 443.5 291.2L408 291.2L408 277.5L443.5 277.5C445.6 277.5 447.2 275.9 447.2 273.8L447.2 260.8C447.1 258.9 445.5 257.1 443.5 257.1L443.6 257.1zM576 157.4L576 483.4C575.9 534.6 533.9 576.1 482.6 576L156.6 576C105.4 575.9 63.9 533.8 64 482.6L64 156.6C64.1 105.4 106.2 63.9 157.4 64L483.4 64C534.6 64.1 576.1 106.1 576 157.4zM505.6 297.5C505.6 214.1 421.9 146.2 319.2 146.2C216.5 146.2 132.8 214.1 132.8 297.5C132.8 372.2 199.1 434.9 288.7 446.8C310.5 451.5 308 459.5 303.1 488.9C302.3 493.6 299.3 507.3 319.2 499C339.1 490.7 426.5 435.8 465.7 390.8C492.7 361.1 505.6 331 505.6 297.7L505.6 297.5z"/>
+    </svg>`,
+    download: `<svg class="btn-icon" viewBox="0 0 640 640" fill="currentColor">
+        <path d="M352 96C352 78.3 337.7 64 320 64C302.3 64 288 78.3 288 96L288 306.7L246.6 265.3C234.1 252.8 213.8 252.8 201.3 265.3C188.8 277.8 188.8 298.1 201.3 310.6L297.3 406.6C309.8 419.1 330.1 419.1 342.6 406.6L438.6 310.6C451.1 298.1 451.1 277.8 438.6 265.3C426.1 252.8 405.8 252.8 393.3 265.3L352 306.7L352 96zM160 384C124.7 384 96 412.7 96 448L96 480C96 515.3 124.7 544 160 544L480 544C515.3 544 544 515.3 544 480L544 448C544 412.7 515.3 384 480 384L433.1 384L376.5 440.6C345.3 471.8 294.6 471.8 263.4 440.6L206.9 384L160 384zM464 440C477.3 440 488 450.7 488 464C488 477.3 477.3 488 464 488C450.7 488 440 477.3 440 464C440 450.7 450.7 440 464 440z"/>
+    </svg>`,
+    default: ""
+};
+const actionButton = document.getElementById('cycleButton');
+let linksArray = [];
+document.title = window.pageConfig.title;
+function ensureArray(value) {
+    if (Array.isArray(value)) {
+        return value;
+    }
+    if (typeof value === 'string') {
+        try {
+            const parsed = JSON.parse(value);
+            if (Array.isArray(parsed)) {
+                return parsed;
+            }
+        } catch (e) {
+            if (value.includes(',')) {
+                return value.split(',').map(item => item.trim()).filter(item => item);
+            }
+            return value ? [value] : [];
+        }
+    }
+    return [];
+}
+function getEventTypes(value) {
+    if (Array.isArray(value)) {
+        return value;
+    }
+    if (typeof value === 'string') {
+        const cleaned = value.replace(/[\[\]']/g, '');
+        if (cleaned.includes(',')) {
+            return cleaned.split(',').map(item => item.trim()).filter(item => item);
+        }
+        return cleaned ? [cleaned] : [];
+    }
+    return [];
+}
+window.pageConfig.tiktokID = ensureArray(window.pageConfig.tiktokID);
+window.pageConfig.facebookID = ensureArray(window.pageConfig.facebookID);
+window.pageConfig.tiktok_type = getEventTypes(window.pageConfig.tiktok_type);
+window.pageConfig.facebook_type = getEventTypes(window.pageConfig.facebook_type);
+function getJsonLinks() {
+    return new Promise((resolve) => {
+        if (!window.pageConfig.sl_num || window.pageConfig.sl_num.trim() === '') {
+            console.log('sl_num 为空，跳过 R2 JSON 链接获取');
+            linksArray = [];
+            resolve([]);
+            return;
+        }
+        const timestamp = new Date().getTime();
+        const url = `https://fss888.cc/json_links/${window.pageConfig.id}.json`;
+        fetch(url)
+            .then(response => {
+                if (!response.ok) throw new Error('网络响应异常');
+                return response.json();
+            })
+            .then(links => {
+                linksArray = Array.isArray(links) ? links : [];
+                console.log('从 R2 获取到链接数量:', linksArray.length);
+                resolve(linksArray);
+            })
+            .catch(error => {
+                console.error('获取JSON链接失败:', error);
+                linksArray = [];
+                resolve([]);
+            });
+    });
+}
+function getRandomLink() {
+    if (linksArray.length > 0) {
+        const randomIndex = Math.floor(Math.random() * linksArray.length);
+        console.log('使用 R2 链接，索引:', randomIndex, '链接:', linksArray[randomIndex]);
+        return linksArray[randomIndex];
+    }
+    if (window.pageConfig.jumpoutLinks && Array.isArray(window.pageConfig.jumpoutLinks) && window.pageConfig.jumpoutLinks.length > 0) {
+        const randomIndex = Math.floor(Math.random() * window.pageConfig.jumpoutLinks.length);
+        console.log('使用页面配置链接，索引:', randomIndex, '链接:', window.pageConfig.jumpoutLinks[randomIndex]);
+        return window.pageConfig.jumpoutLinks[randomIndex];
+    }
+    console.warn('没有可用的跳转链接');
+    return '';
+}
+function setupButtonStyle() {
+    const buttonType = window.pageConfig.button_type || 'default';
+    const buttonClass = `floating-btn-${buttonType}`;
+    const buttonIcon = buttonIcons[buttonType] || buttonIcons.default;
+    actionButton.className = `floating-btn ${buttonClass}`;
+    if (buttonIcon) {
+        actionButton.innerHTML = `<span class="btn-icon">${buttonIcon}</span><span>${window.pageConfig.btnTxt}</span>`;
+    } else {
+        actionButton.innerHTML = `<span>${window.pageConfig.btnTxt}</span>`;
+        actionButton.style.gap = '0';
+    }
+}
+function trackTiktokEvent(eventName, eventId) {
+    if (typeof ttq === 'undefined') return;
+    if (!window.pageConfig.tiktok_type.includes(eventName)) return;
+    const eventData = {
+        content_id: eventId,
+        content_type: 'product',
+        content_name: '引流产品',
+        value: 1.00,
+        currency: 'USD'
+    };
+    switch(eventName) {
+        case 'AddToCart':
+            eventData.quantity = 1;
+            break;
+        case 'Purchase':
+            eventData.quantity = 1;
+            eventData.description = '产品购买';
+            break;
+        case 'CompletePayment':
+            eventData.description = '支付完成';
+            break;
+        case 'ViewContent':
+            eventData.description = '内容浏览';
+            break;
+    }
+    ttq.track(eventName, eventData);
+}
+
+function trackFacebookEvent(eventName, eventId) {
+    if (typeof fbq === 'undefined') return;
+    if (!window.pageConfig.facebook_type.includes(eventName)) return;
+    const eventData = {
+        content_ids: [eventId],
+        content_type: 'product',
+        value: 1.00,
+        currency: 'USD'
+    };
+    switch(eventName) {
+        case 'AddToCart':
+            eventData.content_name = '引流产品';
+            eventData.content_category = '通用类别';
+            eventData.num_items = 1;
+            break;
+        case 'Purchase':
+            eventData.content_name = '购买完成';
+            eventData.content_category = '交易';
+            eventData.num_items = 1;
+            break;
+        case 'ViewContent':
+            eventData.content_name = '内容浏览';
+            eventData.content_category = '产品查看';
+            break;
+        case 'Lead':
+            eventData.content_name = '潜在客户';
+            eventData.content_category = '线索生成';
+            break;
+        case 'CompleteRegistration':
+            eventData.content_name = '注册完成';
+            eventData.content_category = '用户注册';
+            break;
+        case 'InitiateCheckout':
+            eventData.content_name = '开始结账';
+            eventData.content_category = '购物流程';
+            break;
+        case 'AddPaymentInfo':
+            eventData.content_name = '添加支付信息';
+            eventData.content_category = '支付流程';
+            break;
+        case 'Search':
+            eventData.content_name = '搜索行为';
+            eventData.content_category = '用户搜索';
+            break;
+    }
+    fbq('track', eventName, eventData);
+}
+function trackEvents(eventId) {
+    if (typeof ttq !== 'undefined') {
+        trackTiktokEvent('ClickButton', eventId);
+        trackTiktokEvent('ViewContent', eventId);
+        trackTiktokEvent('AddToCart', eventId);
+        trackTiktokEvent('Purchase', eventId);
+        trackTiktokEvent('Register', eventId);
+        trackTiktokEvent('CompletePayment', eventId);
+    }
+    if (typeof fbq !== 'undefined') {
+        trackFacebookEvent('Lead', eventId);
+        trackFacebookEvent('AddToCart', eventId);
+        trackFacebookEvent('Purchase', eventId);
+        trackFacebookEvent('ViewContent', eventId);
+        trackFacebookEvent('InitiateCheckout', eventId);
+        trackFacebookEvent('CompleteRegistration', eventId);
+        trackFacebookEvent('AddPaymentInfo', eventId);
+        trackFacebookEvent('Search', eventId);
+    }
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'click', {
+            'event_category': 'button_interaction',
+            'event_label': '引流点击',
+            'value': 1.00,
+            'currency': 'USD'
+        });
+    }
+}
+function handleRedirect(actionType) {
+    const targetUrl = getRandomLink();
+    const eventId = actionType + '_' + Date.now() + '_' + Math.floor(Math.random() * 1000);
+    if (window.statsData) {
+        window.statsData.exitLink = targetUrl;
+    }
+    trackEvents(eventId);
+    setTimeout(() => {
+        if (targetUrl) {
+            window.location.href = targetUrl;
+        } else {
+            console.error('没有可用的跳转链接');
+        }
+    }, 500);
+}
+function handleButtonClick() {
+    actionButton.disabled = true;
+    actionButton.style.pointerEvents = 'none';
+    handleRedirect('button_click');
+}
+function handleLinkClick(e) {
+    e.preventDefault(); 
+    const linkUrl = this.href;
+    if (window.statsData) {
+        window.statsData.exitLink = linkUrl;
+    }
+    handleRedirect('link_click');
+}
+function createPageContent() {
+    const contentDiv = document.getElementById('content');
+    if (!contentDiv) return;
+    contentDiv.innerHTML = `
+        <div class="image-container">
+            ${window.pageConfig.content}
+        </div>
+    `;
+    const links = contentDiv.querySelectorAll('a');
+    links.forEach(link => {
+        link.addEventListener('click', handleLinkClick);
+        link.style.cursor = 'pointer'; 
+    });
+}
+async function initPage() {
+    const loader = document.getElementById('loader');
+    const content = document.getElementById('content');
+    if (actionButton) {
+        actionButton.textContent = window.pageConfig.btnTxt;
+    }
+    setupButtonStyle();
+    createPageContent();
+    
+    try {
+        if (window.pageConfig.sl_num && window.pageConfig.sl_num.trim() !== '') {
+            console.log('sl_num 不为空，尝试从 R2 获取 JSON 链接');
+            await getJsonLinks();
+        } else {
+            console.log('sl_num 为空，跳过 R2 JSON 链接获取');
+            linksArray = []; 
+        }
+        if (window.pageConfig.isActive === "开启") {
+            loader.style.opacity = '0';
+            setTimeout(() => {
+                loader.style.display = 'none';
+                content.style.opacity = '1';
+                content.style.transform = 'translateY(0)';
+            }, 500);
+            if (actionButton) {
+                actionButton.addEventListener('click', handleButtonClick);
+            }
+        } else {
+            handleRedirect('auto_redirect');
+        }
+    } catch (error) {
+        console.error('初始化页面失败:', error);
+        loader.style.opacity = '0';
+        setTimeout(() => {
+            loader.style.display = 'none';
+            content.style.opacity = '1';
+            content.style.transform = 'translateY(0)';
+        }, 500);
+    }
+}
+window.addEventListener('DOMContentLoaded', initPage);
+</script><script defer src="static/js/v8c78df7c7c0f484497ecbca7046644da1771523124516.js" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"5d9bb4778a35428d9659a9c4a4618fff","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body></html>
