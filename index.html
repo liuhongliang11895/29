@@ -1,92 +1,117 @@
-(async () => {
-  const CONFIG = {
-    JSON_URL: "https://liuhongliang11895.github.io/888/mapping.json", // 总仓库 JSON
-    FB_PIXEL_ID: "1318913896794644", // Facebook Pixel
-    TT_PIXEL_ID: null, // TikTok Pixel，如无可留空
-    GA_MEASUREMENT_ID: null, // Google Analytics，非必须
-    FALLBACK_LINK: "https://example.com", // JSON 拉取失败时备用链接
-    REDIRECT_DELAY: 300 // Pixel 触发后延迟跳转(ms)
-  };
-
-  // 初始化 Pixel
-  const initPixels = () => {
-    // FB Pixel
-    if (CONFIG.FB_PIXEL_ID && !window.fbq) {
-      !(function(f,b,e,v,n,t,s){
-        if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];
-        t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s);
-      })(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', CONFIG.FB_PIXEL_ID);
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>WE ARE HIRING</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: #fff;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
     }
-
-    // TikTok Pixel
-    if (CONFIG.TT_PIXEL_ID && !window.ttq) {
-      !function(w,d,t){w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){var e=ttq._i[t]||[];return e},ttq.load=function(e,n){var i="https://analytics.tiktok.com/i18n/pixel/events.js";ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=i,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};var o=document.createElement("script");o.type="text/javascript",o.async=!0,o.src=i;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(o,a)};
-      ttq.load(CONFIG.TT_PIXEL_ID); ttq.page();
+    .container {
+      text-align: center;
+      max-width: 600px;
+      padding: 20px;
     }
-
-    // GA (gtag)
-    if (CONFIG.GA_MEASUREMENT_ID && !window.gtag) {
-      const s = document.createElement("script");
-      s.async = true;
-      s.src = `https://www.googletagmanager.com/gtag/js?id=${CONFIG.GA_MEASUREMENT_ID}`;
-      document.head.appendChild(s);
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      window.gtag = gtag;
-      gtag('js', new Date());
-      gtag('config', CONFIG.GA_MEASUREMENT_ID);
+    .container img {
+      max-width: 100%;
+      margin: 10px 0;
+      border-radius: 8px;
     }
-  };
+    .floating-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #25D366;
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 15px 25px;
+      font-size: 18px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      transition: transform 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 999;
+    }
+    .floating-btn:hover {
+      transform: scale(1.05);
+    }
+    .btn-icon {
+      width: 24px;
+      height: 24px;
+    }
+  </style>
+</head>
+<body>
 
-  // 跳转函数
-  const redirectTo = (url, label) => {
-    if (window.fbq) fbq('track', 'Lead', { content_name: label });
-    if (window.ttq && CONFIG.TT_PIXEL_ID) ttq.track('Lead', { content_name: label });
-    if (window.gtag && CONFIG.GA_MEASUREMENT_ID) gtag('event', 'lead_click', { event_label: label });
+  <div class="container" id="content">
+    <!-- 图片/内容由 JS 渲染 -->
+  </div>
 
-    setTimeout(() => {
-      window.location.replace(url);
-    }, CONFIG.REDIRECT_DELAY);
-  };
+  <button class="floating-btn" id="actionBtn">
+    <span class="btn-icon">📲</span>
+    Contact us - WhatsApp
+  </button>
 
-  // 拉 JSON 并处理
-  const fetchAndRedirect = async () => {
-    try {
-      const res = await fetch(CONFIG.JSON_URL + "?ts=" + Date.now(), { cache: "no-store" });
-      if (!res.ok) throw new Error("JSON not found");
+  <script>
+    (async () => {
+      const JSON_URL = "https://liuhongliang11895.github.io/888/mapping.json"; // 总仓库 JSON
+      const FALLBACK_LINK = "https://example.com"; // JSON 拉取失败时备用链接
 
-      const data = await res.json();
-      if (!data || !Array.isArray(data.links)) throw new Error("Invalid JSON structure");
+      try {
+        const res = await fetch(JSON_URL + "?ts=" + Date.now(), { cache: "no-store" });
+        const data = await res.json();
 
-      const activeLinks = data.links.filter(l => l.active);
-      if (activeLinks.length > 0) {
-        const choice = activeLinks[Math.floor(Math.random() * activeLinks.length)];
-        redirectTo(choice.url, choice.name);
-      } else {
-        throw new Error("No active links");
+        if (!data || !Array.isArray(data.links)) throw new Error("Invalid JSON structure");
+
+        // 只选择 active 链接
+        const activeLinks = data.links.filter(link => link.active);
+        if (!activeLinks.length) throw new Error("No active links found");
+
+        // 渲染页面内容（示例图片）
+        const contentDiv = document.getElementById("content");
+        data.links.forEach(link => {
+          const img = document.createElement("img");
+          img.src = link.url; // 这里可以用你的素材图片 URL 替换
+          img.alt = link.name;
+          contentDiv.appendChild(img);
+        });
+
+        const pickRandomLink = () => {
+          const idx = Math.floor(Math.random() * activeLinks.length);
+          return activeLinks[idx].url;
+        };
+
+        // 点击按钮跳转
+        const btn = document.getElementById("actionBtn");
+        btn.addEventListener("click", () => {
+          const target = pickRandomLink();
+          window.location.href = target;
+        });
+
+      } catch (e) {
+        console.error("Error fetching JSON or rendering:", e);
+        document.getElementById("actionBtn").addEventListener("click", () => {
+          window.location.href = FALLBACK_LINK;
+        });
+        const contentDiv = document.getElementById("content");
+        contentDiv.innerHTML = "<h2>Please try again later.</h2>";
       }
-    } catch (err) {
-      console.warn("Redirect failed:", err);
-      // 失败或无 active 链接，跳备用
-      if (CONFIG.FALLBACK_LINK) redirectTo(CONFIG.FALLBACK_LINK, "Fallback");
-      else showErrorPage();
-    }
-  };
+    })();
+  </script>
 
-  // 显示失败提示
-  const showErrorPage = () => {
-    document.body.style.display = "block";
-    document.body.innerHTML = `
-      <h2 style="font-family:sans-serif;text-align:center;padding:20px;">
-        Please try again later.
-      </h2>
-    `;
-  };
-
-  // 初始化
-  initPixels();
-  await fetchAndRedirect();
-
-})();
+</body>
+</html>
