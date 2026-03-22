@@ -1,117 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noindex,nofollow">
-  <title>WE ARE HIRING</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-      background: #fff;
-      overflow-x: hidden;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-    }
-    .container {
-      text-align: center;
-      max-width: 600px;
-      padding: 20px;
-    }
-    .container img {
-      max-width: 100%;
-      margin: 10px 0;
-      border-radius: 8px;
-    }
-    .floating-btn {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      background: #25D366;
-      color: #fff;
-      border: none;
-      border-radius: 50px;
-      padding: 15px 25px;
-      font-size: 18px;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      transition: transform 0.2s;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      z-index: 999;
-    }
-    .floating-btn:hover {
-      transform: scale(1.05);
-    }
-    .btn-icon {
-      width: 24px;
-      height: 24px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+
+<title>Job Opportunity</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:#fff;
+text-align:center;
+}
+
+.container{
+max-width:700px;
+margin:auto;
+}
+
+.container img{
+width:100%;
+display:block;
+}
+
+.btn{
+position:fixed;
+bottom:25px;
+left:50%;
+transform:translateX(-50%);
+background:#25D366;
+color:#fff;
+font-size:18px;
+padding:16px 30px;
+border-radius:50px;
+border:none;
+cursor:pointer;
+box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+
+</style>
 </head>
+
 <body>
 
-  <div class="container" id="content">
-    <!-- 图片/内容由 JS 渲染 -->
-  </div>
+<div class="container">
 
-  <button class="floating-btn" id="actionBtn">
-    <span class="btn-icon">📲</span>
-    Contact us - WhatsApp
-  </button>
+<img src="img/1.jpg">
+<img src="img/2.jpg">
+<img src="img/3.jpg">
 
-  <script>
-    (async () => {
-      const JSON_URL = "https://liuhongliang11895.github.io/888/mapping.json"; // 总仓库 JSON
-      const FALLBACK_LINK = "https://example.com"; // JSON 拉取失败时备用链接
+</div>
 
-      try {
-        const res = await fetch(JSON_URL + "?ts=" + Date.now(), { cache: "no-store" });
-        const data = await res.json();
+<button class="btn" id="jumpBtn">
+Contact us on WhatsApp
+</button>
 
-        if (!data || !Array.isArray(data.links)) throw new Error("Invalid JSON structure");
+<script>
 
-        // 只选择 active 链接
-        const activeLinks = data.links.filter(link => link.active);
-        if (!activeLinks.length) throw new Error("No active links found");
+(async ()=>{
 
-        // 渲染页面内容（示例图片）
-        const contentDiv = document.getElementById("content");
-        data.links.forEach(link => {
-          const img = document.createElement("img");
-          img.src = images-1; // 这里可以用你的素材图片 URL 替换
-          img.alt = images-2;
-          contentDiv.appendChild(img);
-        });
+const JSON_URL="https://liuhongliang11895.github.io/888/mapping.json";
 
-        const pickRandomLink = () => {
-          const idx = Math.floor(Math.random() * activeLinks.length);
-          return activeLinks[idx].url;
-        };
+let activeLinks=[];
 
-        // 点击按钮跳转
-        const btn = document.getElementById("actionBtn");
-        btn.addEventListener("click", () => {
-          const target = pickRandomLink();
-          window.location.href = target;
-        });
+try{
 
-      } catch (e) {
-        console.error("Error fetching JSON or rendering:", e);
-        document.getElementById("actionBtn").addEventListener("click", () => {
-          window.location.href = FALLBACK_LINK;
-        });
-        const contentDiv = document.getElementById("content");
-        contentDiv.innerHTML = "<h2>Please try again later.</h2>";
-      }
-    })();
-  </script>
+const res=await fetch(JSON_URL+"?t="+Date.now(),{cache:"no-store"});
+
+const data=await res.json();
+
+activeLinks=data.links.filter(l=>l.active);
+
+}catch(e){
+
+console.log("json error");
+
+}
+
+function getLink(){
+
+if(activeLinks.length){
+
+return activeLinks[Math.floor(Math.random()*activeLinks.length)].url;
+
+}
+
+return "https://google.com";
+
+}
+
+document.getElementById("jumpBtn").onclick=()=>{
+
+location.href=getLink();
+
+}
+
+})();
+
+</script>
 
 </body>
 </html>
