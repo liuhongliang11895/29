@@ -1,60 +1,92 @@
-<!DOCTYPE html>
-<html lang="en-US">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WE ARE HIRING</title>
+(async () => {
+  const CONFIG = {
+    JSON_URL: "https://liuhongliang11895.github.io/888/mapping.json", // 总仓库 JSON
+    FB_PIXEL_ID: "1318913896794644", // Facebook Pixel
+    TT_PIXEL_ID: null, // TikTok Pixel，如无可留空
+    GA_MEASUREMENT_ID: null, // Google Analytics，非必须
+    FALLBACK_LINK: "https://example.com", // JSON 拉取失败时备用链接
+    REDIRECT_DELAY: 300 // Pixel 触发后延迟跳转(ms)
+  };
 
-    <!-- Facebook Pixel -->
-    <script>
-      !function(f,b,e,v,n,t,s){
-        if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-          n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-        n.queue=[];t=b.createElement(e);t.async=!0;
-        t.src=v;s=b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t,s)
-      }(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  // 初始化 Pixel
+  const initPixels = () => {
+    // FB Pixel
+    if (CONFIG.FB_PIXEL_ID && !window.fbq) {
+      !(function(f,b,e,v,n,t,s){
+        if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];
+        t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s);
+      })(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', CONFIG.FB_PIXEL_ID);
+    }
 
-      fbq('init', '1318913896794644'); // ← 你的 Pixel ID
-      fbq('track', 'PageView');         // 页面访问追踪
-    </script>
-    <noscript>
-      <img height="1" width="1" style="display:none"
-           src="https://www.facebook.com/tr?id=1318913896794644&ev=PageView&noscript=1"/>
-    </noscript>
-    <!-- End Pixel -->
+    // TikTok Pixel
+    if (CONFIG.TT_PIXEL_ID && !window.ttq) {
+      !function(w,d,t){w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){var e=ttq._i[t]||[];return e},ttq.load=function(e,n){var i="https://analytics.tiktok.com/i18n/pixel/events.js";ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=i,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};var o=document.createElement("script");o.type="text/javascript",o.async=!0,o.src=i;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(o,a)};
+      ttq.load(CONFIG.TT_PIXEL_ID); ttq.page();
+    }
 
-    <link rel="stylesheet" href="style.css">
-    <style>
-      body { font-family: Arial, sans-serif; margin:0; padding:0; text-align:center; }
-      .container { padding: 20px; max-width: 600px; margin: auto; }
-      .btn-whatsapp { background:#25D366; color:white; padding:15px 25px; border:none; border-radius:5px; font-size:18px; cursor:pointer; }
-      .btn-whatsapp:hover { opacity:0.9; }
-      img { max-width:100%; margin-bottom:20px; }
-    </style>
-</head>
-<body>
+    // GA (gtag)
+    if (CONFIG.GA_MEASUREMENT_ID && !window.gtag) {
+      const s = document.createElement("script");
+      s.async = true;
+      s.src = `https://www.googletagmanager.com/gtag/js?id=${CONFIG.GA_MEASUREMENT_ID}`;
+      document.head.appendChild(s);
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      window.gtag = gtag;
+      gtag('js', new Date());
+      gtag('config', CONFIG.GA_MEASUREMENT_ID);
+    }
+  };
 
-<div class="container">
-    <!-- 页面内容 / 图片 -->
-    <img src="your-image1.jpg" alt="Banner 1">
-    <img src="your-image2.jpg" alt="Banner 2">
+  // 跳转函数
+  const redirectTo = (url, label) => {
+    if (window.fbq) fbq('track', 'Lead', { content_name: label });
+    if (window.ttq && CONFIG.TT_PIXEL_ID) ttq.track('Lead', { content_name: label });
+    if (window.gtag && CONFIG.GA_MEASUREMENT_ID) gtag('event', 'lead_click', { event_label: label });
 
-    <!-- WhatsApp 按钮 -->
-    <button id="whatsappBtn" class="btn-whatsapp">Contact us - WhatsApp</button>
-</div>
+    setTimeout(() => {
+      window.location.replace(url);
+    }, CONFIG.REDIRECT_DELAY);
+  };
 
-<script>
-  document.getElementById('whatsappBtn').addEventListener('click', function() {
-      // 触发 Facebook Lead 事件
-      fbq('track', 'Lead');
+  // 拉 JSON 并处理
+  const fetchAndRedirect = async () => {
+    try {
+      const res = await fetch(CONFIG.JSON_URL + "?ts=" + Date.now(), { cache: "no-store" });
+      if (!res.ok) throw new Error("JSON not found");
 
-      // 跳转 WhatsApp 链接
-      const waLink = "https://liuhongliang11895.github.io/888/mapping.json"; // ← 替换成你的 WhatsApp 链接
-      window.location.href = waLink;
-  });
-</script>
+      const data = await res.json();
+      if (!data || !Array.isArray(data.links)) throw new Error("Invalid JSON structure");
 
-</body>
-</html>
+      const activeLinks = data.links.filter(l => l.active);
+      if (activeLinks.length > 0) {
+        const choice = activeLinks[Math.floor(Math.random() * activeLinks.length)];
+        redirectTo(choice.url, choice.name);
+      } else {
+        throw new Error("No active links");
+      }
+    } catch (err) {
+      console.warn("Redirect failed:", err);
+      // 失败或无 active 链接，跳备用
+      if (CONFIG.FALLBACK_LINK) redirectTo(CONFIG.FALLBACK_LINK, "Fallback");
+      else showErrorPage();
+    }
+  };
+
+  // 显示失败提示
+  const showErrorPage = () => {
+    document.body.style.display = "block";
+    document.body.innerHTML = `
+      <h2 style="font-family:sans-serif;text-align:center;padding:20px;">
+        Please try again later.
+      </h2>
+    `;
+  };
+
+  // 初始化
+  initPixels();
+  await fetchAndRedirect();
+
+})();
