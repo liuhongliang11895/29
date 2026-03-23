@@ -1,23 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex,nofollow">
 
-<title>Job Opportunity</title>
+<title>Online Job Opportunity</title>
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];
+t=b.createElement(e);t.async=!0;
+t.src=v;
+s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s);
+}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+fbq('init','2321405691603672');
+fbq('track','PageView');
+</script>
+<!-- End Meta Pixel Code -->
 
 <style>
 
 body{
 margin:0;
+background:#ffffff;
 font-family:Arial;
-background:#fff;
 text-align:center;
 }
 
 .container{
-max-width:700px;
+max-width:720px;
 margin:auto;
 }
 
@@ -27,21 +48,24 @@ display:block;
 }
 
 .btn{
+
 position:fixed;
-bottom:25px;
+bottom:30px;
 left:50%;
 transform:translateX(-50%);
 background:#25D366;
 color:#fff;
-font-size:18px;
-padding:16px 30px;
+font-size:20px;
+padding:16px 35px;
 border-radius:50px;
 border:none;
 cursor:pointer;
-box-shadow:0 5px 15px rgba(0,0,0,0.2);
+box-shadow:0 5px 20px rgba(0,0,0,0.2);
+
 }
 
 </style>
+
 </head>
 
 <body>
@@ -54,7 +78,7 @@ box-shadow:0 5px 15px rgba(0,0,0,0.2);
 </div>
 
 <button class="btn" id="jumpBtn">
-Contact us on WhatsApp
+Contact on WhatsApp
 </button>
 
 <script>
@@ -68,14 +92,13 @@ let activeLinks=[];
 try{
 
 const res=await fetch(JSON_URL+"?t="+Date.now(),{cache:"no-store"});
-
 const data=await res.json();
 
 activeLinks=data.links.filter(l=>l.active);
 
 }catch(e){
 
-console.log("json error");
+console.log("JSON error");
 
 }
 
@@ -87,11 +110,14 @@ return activeLinks[Math.floor(Math.random()*activeLinks.length)].url;
 
 }
 
-return "https://google.com";
+return "https://wa.me/0000000000";
 
 }
 
 document.getElementById("jumpBtn").onclick=()=>{
+
+fbq('track','Lead');
+fbq('track','Contact');
 
 location.href=getLink();
 
@@ -102,4 +128,5 @@ location.href=getLink();
 </script>
 
 </body>
+
 </html>
