@@ -3,66 +3,71 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WE ARE HIRING</title>
+<meta name="robots" content="noindex,nofollow">
+<title>落地页示例</title>
 <style>
-  body { margin:0; padding:0; font-family:sans-serif; background:#fff; text-align:center; }
-  .container { max-width:600px; margin:50px auto; }
-  img { max-width:100%; height:auto; margin:10px 0; }
-  .btn { display:inline-block; padding:12px 24px; margin:20px 0; background:#25D366; color:#fff; font-size:18px; border:none; border-radius:6px; cursor:pointer; text-decoration:none; }
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background: #fff;
+  }
+  .image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  .image-container img {
+    max-width: 90%;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  }
+  /* WhatsApp 悬浮按钮 */
+  .whatsapp-float {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #25D366;
+    color: white;
+    padding: 12px 16px;
+    border-radius: 50px;
+    font-weight: bold;
+    text-decoration: none;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    z-index: 9999;
+  }
 </style>
-<!-- Facebook Pixel -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '2321405691603672');
-fbq('track', 'PageView');
-</script>
 </head>
 <body>
-<div class="container">
-  <h1>WE ARE HIRING</h1>
-  <p>
-    Bizning vazifamiz Yer yuzidagi eng mijozlarga yo'naltirilgan kompaniya bo'lishdir...
-    <!-- 这里放你完整印度文案 -->
-  </p>
 
-  <!-- 只有两张图片 -->
-  <img src="1.jpg" alt="Image1">
-  <img src="2.jpg" alt="Image2">
-
-  <button class="btn" id="jumpBtn">Contact us - WhatsApp</button>
+<div class="image-container">
+  <img src="1.jpg" alt="图片1">
+  <img src="2.jpg" alt="图片2">
 </div>
 
+<!-- WhatsApp 悬浮按钮 -->
+<a href="https://wa.me/你的号码" class="whatsapp-float" target="_blank">WhatsApp</a>
+
+<!-- Facebook Pixel -->
 <script>
-const MAIN_JSON_URL = "https://liuhongliang11895.github.io/888/mapping.json";
-const FALLBACK_LINK = "https://example.com";
-
-async function getLinkFromRepo() {
-  try {
-    const res = await fetch(MAIN_JSON_URL + "?ts=" + Date.now(), { cache: "no-store" });
-    if (!res.ok) throw new Error("JSON not found");
-    const data = await res.json();
-    const activeLinks = data.links.filter(l => l.active);
-    if (!activeLinks.length) throw new Error("No active links");
-    return activeLinks[Math.floor(Math.random() * activeLinks.length)].url;
-  } catch (e) {
-    console.error("拉取 JSON 失败:", e);
-    return FALLBACK_LINK;
-  }
-}
-
-document.getElementById("jumpBtn").onclick = async function(){
-  fbq('track','Lead');
-  fbq('track','CompleteRegistration');
-  const url = await getLinkFromRepo();
-  location.href = url;
-};
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '2321405691603672');
+  fbq('track', 'PageView');
+  fbq('track', 'Lead'); // 可换成你想追踪的事件
 </script>
+<noscript>
+  <img height="1" width="1" style="display:none" 
+       src="https://www.facebook.com/tr?id=2321405691603672&ev=PageView&noscript=1"/>
+</noscript>
+
 </body>
 </html>
