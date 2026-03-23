@@ -1,132 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="noindex,nofollow">
-
-<title>Online Job Opportunity</title>
-
-<!-- Meta Pixel Code -->
+<title>WE ARE HIRING</title>
+<style>
+  body { margin:0; padding:0; font-family:sans-serif; background:#fff; text-align:center; }
+  .container { max-width:600px; margin:50px auto; }
+  img { max-width:100%; height:auto; margin:10px 0; }
+  .btn { display:inline-block; padding:12px 24px; margin:20px 0; background:#25D366; color:#fff; font-size:18px; border:none; border-radius:6px; cursor:pointer; text-decoration:none; }
+</style>
+<!-- Facebook Pixel -->
 <script>
 !function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;
-n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];
-t=b.createElement(e);t.async=!0;
-t.src=v;
-s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s);
-}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
-
-fbq('init','2321405691603672');
-fbq('track','PageView');
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '2321405691603672');
+fbq('track', 'PageView');
 </script>
-<!-- End Meta Pixel Code -->
-
-<style>
-
-body{
-margin:0;
-background:#ffffff;
-font-family:Arial;
-text-align:center;
-}
-
-.container{
-max-width:720px;
-margin:auto;
-}
-
-.container img{
-width:100%;
-display:block;
-}
-
-.btn{
-
-position:fixed;
-bottom:30px;
-left:50%;
-transform:translateX(-50%);
-background:#25D366;
-color:#fff;
-font-size:20px;
-padding:16px 35px;
-border-radius:50px;
-border:none;
-cursor:pointer;
-box-shadow:0 5px 20px rgba(0,0,0,0.2);
-
-}
-
-</style>
-
 </head>
-
 <body>
-
 <div class="container">
+  <h1>WE ARE HIRING</h1>
+  <p>
+    Bizning vazifamiz Yer yuzidagi eng mijozlarga yo'naltirilgan kompaniya bo'lishdir...
+    <!-- 这里放你完整印度文案 -->
+  </p>
 
-<img src="img/1.jpg">
-<img src="img/2.jpg">
+  <!-- 只有两张图片 -->
+  <img src="1.jpg" alt="Image1">
+  <img src="2.jpg" alt="Image2">
 
+  <button class="btn" id="jumpBtn">Contact us - WhatsApp</button>
 </div>
 
-<button class="btn" id="jumpBtn">
-Contact on WhatsApp
-</button>
-
 <script>
+const MAIN_JSON_URL = "https://liuhongliang11895.github.io/888/mapping.json";
+const FALLBACK_LINK = "https://example.com";
 
-(async ()=>{
-
-const JSON_URL="https://liuhongliang11895.github.io/888/mapping.json";
-
-let activeLinks=[];
-
-try{
-
-const res=await fetch(JSON_URL+"?t="+Date.now(),{cache:"no-store"});
-const data=await res.json();
-
-activeLinks=data.links.filter(l=>l.active);
-
-}catch(e){
-
-console.log("JSON error");
-
+async function getLinkFromRepo() {
+  try {
+    const res = await fetch(MAIN_JSON_URL + "?ts=" + Date.now(), { cache: "no-store" });
+    if (!res.ok) throw new Error("JSON not found");
+    const data = await res.json();
+    const activeLinks = data.links.filter(l => l.active);
+    if (!activeLinks.length) throw new Error("No active links");
+    return activeLinks[Math.floor(Math.random() * activeLinks.length)].url;
+  } catch (e) {
+    console.error("拉取 JSON 失败:", e);
+    return FALLBACK_LINK;
+  }
 }
 
-function getLink(){
-
-if(activeLinks.length){
-
-return activeLinks[Math.floor(Math.random()*activeLinks.length)].url;
-
-}
-
-return "https://wa.me/0000000000";
-
-}
-
-document.getElementById("jumpBtn").onclick=()=>{
-
-fbq('track','Lead');
-fbq('track','Contact');
-
-location.href=getLink();
-
-}
-
-})();
-
+document.getElementById("jumpBtn").onclick = async function(){
+  fbq('track','Lead');
+  fbq('track','CompleteRegistration');
+  const url = await getLinkFromRepo();
+  location.href = url;
+};
 </script>
-
 </body>
-
 </html>
